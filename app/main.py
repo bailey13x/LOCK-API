@@ -4,9 +4,12 @@ import sqlite3
 import hashlib
 import random
 
+
 # Initialize FastAPI app
 app = FastAPI()
-
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the FastAPI app!"}
 # Database setup
 DB_FILE = "product_keys.db"
 
