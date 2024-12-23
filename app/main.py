@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import sqlite3
+import psycopg2
 import hashlib
 import random
 import os
@@ -10,21 +10,35 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the FastAPI app!"}
+    return {"message": "Welcome to the FastAPI app with PostgreSQL!"}
 
-# Database setup
-# Use persistent disk on Render or fallback to the local directory for SQLite
-DB_FILE = os.getenv("DB_PATH", "./product_keys.db")  # Use env variable for flexibility
+# PostgreSQL Connection Setup
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "5432")
+DB_USER = os.getenv("DB_USER", "postgres")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "password")
+DB_NAME = os.getenv("DB_NAME", "lock")
 
+def get_db_connection():
+    try:
+        conn = psycopg2.connect(
+            host=DB_HOST,
+            port=DB_PORT,
+            user=DB_USER,
+            password=DB_PASSWORD,
+            dbname=DB_NAME
+        )
+        return conn
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Database connection failed: {e}")
+
+# Initialize Database (Run Once)
 def init_db():
-    """Initialize the SQLite database."""
-    if not os.path.exists(DB_FILE):
-        print(f"Creating database at {DB_FILE}")
-    conn = sqlite3.connect(DB_FILE)
+    conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS ProductKeys (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             key TEXT UNIQUE NOT NULL,
             app_id TEXT NOT NULL,
             user_id TEXT,
@@ -35,10 +49,9 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Initialize database
-init_db()
+init_db()  # Ensure table is created
 
-# Utility functions
+# Utility Functions
 def generate_key(app_id: str) -> str:
     """Generate a product key with a checksum."""
     segments = ["".join(random.choices("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", k=4)) for _ in range(3)]
@@ -47,34 +60,35 @@ def generate_key(app_id: str) -> str:
     return f"{key_body}-{checksum}"
 
 def save_key_to_db(product_key: str, app_id: str, user_id: str = None, expiration_date: str = None):
-    """Save a product key to the database."""
-    conn = sqlite3.connect(DB_FILE)
+    """Save a product key to the PostgreSQL database."""
+    conn = get_db_connection()
     cursor = conn.cursor()
     try:
         cursor.execute("""
             INSERT INTO ProductKeys (key, app_id, user_id, is_valid, expiration_date)
-            VALUES (?, ?, ?, ?, ?)
+            VALUES (%s, %s, %s, %s, %s)
         """, (product_key, app_id, user_id, True, expiration_date))
         conn.commit()
-    except sqlite3.IntegrityError:
+    except psycopg2.IntegrityError:
+        conn.rollback()
         raise HTTPException(status_code=400, detail="Key already exists.")
     finally:
         conn.close()
 
 def validate_key_from_db(product_key: str) -> bool:
-    """Validate a product key from the database."""
-    conn = sqlite3.connect(DB_FILE)
+    """Validate a product key from the PostgreSQL database."""
+    conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT is_valid FROM ProductKeys WHERE key = ?", (product_key,))
+    cursor.execute("SELECT is_valid FROM ProductKeys WHERE key = %s", (product_key,))
     result = cursor.fetchone()
     conn.close()
-    return bool(result) and result[0]
+    return result and result[0]
 
 def revoke_key_in_db(product_key: str):
-    """Revoke a product key in the database."""
-    conn = sqlite3.connect(DB_FILE)
+    """Revoke a product key in the PostgreSQL database."""
+    conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("UPDATE ProductKeys SET is_valid = FALSE WHERE key = ?", (product_key,))
+    cursor.execute("UPDATE ProductKeys SET is_valid = FALSE WHERE key = %s", (product_key,))
     conn.commit()
     conn.close()
 
