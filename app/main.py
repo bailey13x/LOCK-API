@@ -3,17 +3,23 @@ from pydantic import BaseModel
 import sqlite3
 import hashlib
 import random
-
+import os
 
 # Initialize FastAPI app
 app = FastAPI()
+
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the FastAPI app!"}
+
 # Database setup
-DB_FILE = "product_keys.db"
+# Use persistent disk on Render or fallback to the local directory for SQLite
+DB_FILE = os.getenv("DB_PATH", "./product_keys.db")  # Use env variable for flexibility
 
 def init_db():
+    """Initialize the SQLite database."""
+    if not os.path.exists(DB_FILE):
+        print(f"Creating database at {DB_FILE}")
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     cursor.execute("""
@@ -62,7 +68,7 @@ def validate_key_from_db(product_key: str) -> bool:
     cursor.execute("SELECT is_valid FROM ProductKeys WHERE key = ?", (product_key,))
     result = cursor.fetchone()
     conn.close()
-    return result and result[0]
+    return bool(result) and result[0]
 
 def revoke_key_in_db(product_key: str):
     """Revoke a product key in the database."""
@@ -84,12 +90,14 @@ class ValidationRequest(BaseModel):
 # API Endpoints
 @app.post("/generate")
 def generate_key_endpoint(request: KeyRequest):
+    """Generate a product key."""
     product_key = generate_key(request.app_id)
     save_key_to_db(product_key, request.app_id, request.user_id, request.expiration_date)
     return {"key": product_key}
 
 @app.post("/validate")
 def validate_key_endpoint(request: ValidationRequest):
+    """Validate a product key."""
     is_valid = validate_key_from_db(request.key)
     if not is_valid:
         raise HTTPException(status_code=400, detail="Invalid or revoked key.")
@@ -97,5 +105,6 @@ def validate_key_endpoint(request: ValidationRequest):
 
 @app.post("/revoke")
 def revoke_key_endpoint(request: ValidationRequest):
+    """Revoke a product key."""
     revoke_key_in_db(request.key)
     return {"status": "Key revoked successfully."}
