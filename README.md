@@ -24,5 +24,5 @@
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/LOCK.git
+   git clone https://github.com/bailey13x/LOCK.git
    cd LOCK
