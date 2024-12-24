@@ -1,5 +1,5 @@
 
-# Lock API
+# Lock-API
 
 Lock API is a simple and secure product key management system built with **FastAPI**. It allows developers to deploy their own API for managing product keys, enabling features like key generation, validation, and revocation. This project is perfect for licensing applications, securing software products, or implementing a subscription-based system.
 
