@@ -19,12 +19,39 @@ Lock API is a simple and secure product key management system built with **FastA
 
 Follow these steps to set up your own Lock API instance.
 
-### **Step 1: Clone the Repository**
-Clone this repository to your local machine:
-```bash
-git clone https://github.com/bailey13x/lock-api.git
-cd lock-api
-```
+### **Step 1: Prepare and Clone the Repository**
+
+Before deploying the Lock API, you need to set up GitHub and clone the repository.
+
+1. **Create a GitHub Account (if you don’t have one):**
+   - Visit [GitHub](https://github.com/) and sign up for a free account.
+
+2. **Fork the Repository:**
+   - Navigate to the original repository on GitHub (e.g., `https://github.com/yourusername/lock-api`).
+   - Click the **Fork** button at the top-right corner of the page to create a copy of the repository in your own GitHub account.
+
+3. **Clone the Forked Repository:**
+   - Open a terminal or Git client on your local machine.
+   - Run the following command to clone your forked repository:
+     ```bash
+     git clone https://github.com/yourusername/lock-api.git
+     ```
+
+4. **Navigate to the Project Directory:**
+   - Change into the newly cloned repository directory:
+     ```bash
+     cd lock-api
+     ```
+
+5. **Set Up Your Remote Repository (Optional):**
+   - Ensure your local repository is linked to your GitHub fork:
+     ```bash
+     git remote -v
+     ```
+   - If necessary, add your fork as the origin:
+     ```bash
+     git remote add origin https://github.com/bailey13x/lock-api.git
+     ```
 
 ---
 
@@ -237,4 +264,4 @@ To run the API with a local PostgreSQL database:
 
 ## License
 
-This project is licensed under a Custom Liscense Agreement . See the LICENSE file for details.
+This project is licensed a Custom Liscense Agreement. See the LICENSE file for details.
