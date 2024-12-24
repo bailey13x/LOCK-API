@@ -13,11 +13,11 @@ def read_root():
     return {"message": "Welcome to the FastAPI app with PostgreSQL!"}
 
 # PostgreSQL Connection Setup
-DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_HOST = os.getenv("DB_HOST", "dpg-ctlam61opnds73858d9g-a")
 DB_PORT = os.getenv("DB_PORT", "5432")
-DB_USER = os.getenv("DB_USER", "postgres")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "password")
-DB_NAME = os.getenv("DB_NAME", "lock")
+DB_USER = os.getenv("DB_USER", "lock_database")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "5jg2OaPfPdQCr06lmEpw6burFA6zEln4")
+DB_NAME = os.getenv("DB_NAME", "lock_database")
 
 def get_db_connection():
     try:
