@@ -27,33 +27,8 @@ Before deploying the Lock API, you need to set up GitHub and clone the repositor
    - Visit [GitHub](https://github.com/) and sign up for a free account.
 
 2. **Fork the Repository:**
-   - Navigate to the original repository on GitHub (e.g., `https://github.com/yourusername/lock-api`).
+   - Navigate to the original repository on GitHub (e.g., `https://github.com/bailey13x/lock-api`).
    - Click the **Fork** button at the top-right corner of the page to create a copy of the repository in your own GitHub account.
-
-3. **Clone the Forked Repository:**
-   - Open a terminal or Git client on your local machine.
-   - Run the following command to clone your forked repository:
-     ```bash
-     git clone https://github.com/yourusername/lock-api.git
-     ```
-
-4. **Navigate to the Project Directory:**
-   - Change into the newly cloned repository directory:
-     ```bash
-     cd lock-api
-     ```
-
-5. **Set Up Your Remote Repository (Optional):**
-   - Ensure your local repository is linked to your GitHub fork:
-     ```bash
-     git remote -v
-     ```
-   - If necessary, add your fork as the origin:
-     ```bash
-     git remote add origin https://github.com/yourusername/lock-api.git
-     ```
-
----
 
 ### **Step 2: Create a PostgreSQL Database on Render**
 
@@ -226,4 +201,4 @@ Before deploying the Lock API, you need to set up GitHub and clone the repositor
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under a Custom User Agreement. See the LICENSE file for details.
