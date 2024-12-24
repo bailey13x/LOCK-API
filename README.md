@@ -190,18 +190,6 @@ If you encounter any issues or have questions, please open an issue in the repos
 
 ---
 
-### Screenshots
-#### Key Validation Flow
-1. **Key Validation Request**:
-   ![Key Validation Request Example](https://via.placeholder.com/800x400?text=Key+Validation+Request)
-
-2. **Successful Validation**:
-   ![Successful Validation Example](https://via.placeholder.com/800x400?text=Successful+Validation)
-
-3. **Invalid Key**:
-   ![Invalid Key Example](https://via.placeholder.com/800x400?text=Invalid+Key)
-
----
 
 ## Future Enhancements
 
