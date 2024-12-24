@@ -22,7 +22,7 @@ Follow these steps to set up your own Lock API instance.
 ### **Step 1: Clone the Repository**
 Clone this repository to your local machine:
 ```bash
-git clone https://github.com/yourusername/lock-api.git
+git clone https://github.com/bailey13x/lock-api.git
 cd lock-api
 ```
 
