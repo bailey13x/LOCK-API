@@ -237,4 +237,4 @@ To run the API with a local PostgreSQL database:
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under a Custom Liscense Agreement . See the LICENSE file for details.
