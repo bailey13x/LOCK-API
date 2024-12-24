@@ -11,7 +11,7 @@ Lock API is a simple and secure product key management system built with **FastA
 - ✅ **Key Validation**: Validate product keys using a RESTful API endpoint.
 - ❌ **Key Revocation**: Revoke keys that are no longer valid.
 - 🗄️ **Database Integration**: Uses PostgreSQL for secure key storage.
-- 🚀 **Easy Deployment**: Deploy your own Lock API on platforms like **Render** or **locally**.
+- 🚀 **Easy Deployment**: Deploy your own Lock API on platforms like **Render**.
 
 ---
 
@@ -27,7 +27,7 @@ Before deploying the Lock API, you need to set up GitHub and clone the repositor
    - Visit [GitHub](https://github.com/) and sign up for a free account.
 
 2. **Fork the Repository:**
-   - Navigate to the original repository on GitHub (e.g., `https://github.com/bailey13x/lock-api`).
+   - Navigate to the original repository on GitHub (e.g., `https://github.com/yourusername/lock-api`).
    - Click the **Fork** button at the top-right corner of the page to create a copy of the repository in your own GitHub account.
 
 3. **Clone the Forked Repository:**
@@ -224,44 +224,6 @@ Before deploying the Lock API, you need to set up GitHub and clone the repositor
 
 ---
 
-### **Optional: Local Database Setup**
-
-To run the API with a local PostgreSQL database:
-
-1. **Install PostgreSQL:**
-   - Download and install PostgreSQL from [PostgreSQL.org](https://www.postgresql.org/).
-
-2. **Create a Database:**
-   ```bash
-   createdb lock_db
-   ```
-
-3. **Set Up Environment Variables:**
-   Create a `.env` file in the project root with the following content:
-   ```plaintext
-   DB_HOST=localhost
-   DB_PORT=5432
-   DB_USER=your_postgres_username
-   DB_PASSWORD=your_postgres_password
-   DB_NAME=lock_db
-   ```
-
-4. **Initialize the Database:**
-   Run the initialization script:
-   ```bash
-   python initialize_db.py
-   ```
-
-5. **Start the API Locally:**
-   ```bash
-   uvicorn app.main:app --reload
-   ```
-
-6. **Test the API:**
-   Use Postman or `curl` with `http://127.0.0.1:8000` as the base URL.
-
----
-
 ## License
 
-This project is licensed a Custom Liscense Agreement. See the LICENSE file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
