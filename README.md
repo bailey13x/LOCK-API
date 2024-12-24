@@ -186,7 +186,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Support
 
-If you encounter any issues or have questions, please open an issue in the repository or contact us at support@yourdomain.com.
+If you encounter any issues or have questions, please open an issue in the repository.
 
 ---
 
