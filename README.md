@@ -27,7 +27,7 @@ Before deploying the Lock API, you need to set up GitHub and clone the repositor
    - Visit [GitHub](https://github.com/) and sign up for a free account.
 
 2. **Fork the Repository:**
-   - Navigate to the original repository on GitHub (e.g., `https://github.com/yourusername/lock-api`).
+   - Navigate to the original repository on GitHub (e.g., `https://github.com/bailey13x/lock-api`).
    - Click the **Fork** button at the top-right corner of the page to create a copy of the repository in your own GitHub account.
 
 3. **Clone the Forked Repository:**
@@ -50,7 +50,7 @@ Before deploying the Lock API, you need to set up GitHub and clone the repositor
      ```
    - If necessary, add your fork as the origin:
      ```bash
-     git remote add origin https://github.com/bailey13x/lock-api.git
+     git remote add origin https://github.com/yourusername/lock-api.git
      ```
 
 ---
