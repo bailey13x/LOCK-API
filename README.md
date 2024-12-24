@@ -4,7 +4,7 @@
 - Product key generation with validation.
 - Secure local key storage using encryption.
 - Remote API integration for key verification.
-- A GUI for easy key entry and management.
+- A GUI for easy key entry.
 
 ## Features
 - **Key Generation**: Generate unique product keys with checksum validation.
