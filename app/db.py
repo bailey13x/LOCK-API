@@ -18,7 +18,7 @@ if not DATABASE_URL:
 
 def get_db_connection():
     try:
-        # Attempt to connect using the DATABASE_URL
+        # Use DATABASE_URL with SSL
         conn = psycopg2.connect(DATABASE_URL, sslmode="require")
         return conn
     except Exception as e:
