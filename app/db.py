@@ -38,9 +38,10 @@ def init_db():
                 expiration_date DATE
             )
         """)
-        conn.commit()
-        conn.close()
+        conn.commit()  # Commit the changes
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Database initialization failed: {e}")
-    conn.commit()
-    conn.close()
+    finally:
+        # Ensure the connection is closed properly
+        if conn:
+            conn.close()
