@@ -41,16 +41,22 @@ Before deploying the Lock API, you need to set up GitHub and clone the repositor
 4. Click **Create Database**.
 5. Once created, Render will generate a `DATABASE_URL` for your database. Copy this URL for use in the next steps.
 
+### **Step 3: Generate Encyption Info**
+
+1. Run key-generator.py (copy provided key and save)
+2. Run encrypt_data.py (filling in porvided key and database url where asked)
+3. Save the Encrypted Database URL given
+
 ---
 
-### **Step 3: Deploy the Lock API on Render**
+### **Step 4: Deploy the Lock API on Render**
 
 1. Go to your Render Dashboard and click **"New +"** > **"Web Service"**.
 2. Select **"Connect to GitHub"** or **"Deploy Manually"** to upload your project files.
 3. Fill in the required details:
    - **Name:** Choose a name for your service (e.g., `lock-api`).
    - **Environment:** Set the following environment variable:
-     - `DATABASE_URL`: Paste the PostgreSQL `DATABASE_URL` you copied earlier.
+     - `DATABASE_URL_ENCRYPTED`: Paste the Encrypted `DATABASE_URL` you copied earlier.
    - **Build Command:** Install the required dependencies:
      ```bash
      pip install -r requirements.txt
@@ -68,9 +74,9 @@ Before deploying the Lock API, you need to set up GitHub and clone the repositor
 
 ---
 
-### **Step 4: Initialize and Test the Database Using Postman**
+### **Step 5: Initialize and Test the Database Using Postman**
 
-#### **4.1 Add the Database Table**
+#### **5.1 Add the Database Table**
 
 1. Open Postman.
 2. Create a new **POST** request.
@@ -101,7 +107,7 @@ Before deploying the Lock API, you need to set up GitHub and clone the repositor
 
 ---
 
-#### **4.2 Manually Create the Database Table**
+#### **5.2 Manually Create the Database Table**
 
 1. Open Postman.
 2. Create a new **POST** request to the following Render **PostgreSQL Shell** endpoint:
@@ -126,7 +132,7 @@ Before deploying the Lock API, you need to set up GitHub and clone the repositor
 
 ---
 
-#### **4.3 Validate the Generated Key**
+#### **5.3 Validate the Generated Key**
 
 1. In Postman, create another **POST** request.
 2. Set the URL to:
@@ -159,7 +165,7 @@ Before deploying the Lock API, you need to set up GitHub and clone the repositor
 
 ---
 
-#### **4.4 Revoke the Key**
+#### **5.4 Revoke the Key**
 
 1. In Postman, create another **POST** request.
 2. Set the URL to:
@@ -187,7 +193,7 @@ Before deploying the Lock API, you need to set up GitHub and clone the repositor
 
 ---
 
-### **Step 5: Verify Deployment**
+### **Step 6: Verify Deployment**
 
 1. Open your Render web service URL in a browser (e.g., `https://lock-api.onrender.com`).
 2. You should see the root message:
