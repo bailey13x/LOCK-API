@@ -22,7 +22,7 @@ def get_db_connection():
         conn = psycopg2.connect(DATABASE_URL, sslmode="require")
         return conn
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Database connection failed: {e}"))
+        raise HTTPException(status_code=500, detail=f"Database connection failed: {e}")
 
 def init_db():
     try:
